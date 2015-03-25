@@ -43,6 +43,11 @@ class Revisionable extends Eloquent
             $model->postSave();
         });
 
+		static::created(function ($model)
+		{
+			$model->postCreate();
+		});
+
         static::deleted(function ($model) {
             $model->preSave();
             $model->postDelete();
@@ -138,6 +143,27 @@ class Revisionable extends Eloquent
         }
 
     }
+
+	/**
+	 * Called after record successfully created
+	 */
+	public function postCreate()
+	{
+		if (( ! isset($this->revisionEnabled) || $this->revisionEnabled))
+		{
+			$revisions[] = array('revisionable_type' => get_class($this),
+			                     'revisionable_id'   => $this->getKey(),
+			                     'key'               => 'created_at',
+			                     'old_value'         => $this->created_at,
+			                     'new_value'         => null,
+			                     'user_id'           => $this->getUserId(),
+			                     'created_at'        => new \DateTime(),
+			                     'updated_at'        => new \DateTime(),
+			);
+			$revision    = new \Venturecraft\Revisionable\Revision;
+			\DB::table($revision->getTable())->insert($revisions);
+		}
+	}
 
     /**
      * If softdeletes are enabled, store the deleted time
