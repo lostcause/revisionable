@@ -199,6 +199,7 @@ class Revisionable extends Eloquent
                     || class_exists($class = '\Cartalyst\Sentinel\Laravel\Facades\Sentinel')) 
             {
                 return ($class::check()) ? $class::getUser()->id : null;
+            }
 		elseif (\Auth::agent()->check())
 		{
 			return \Auth::agent()->getUser()->getAuthIdentifier();
@@ -207,7 +208,6 @@ class Revisionable extends Eloquent
 		{
 			return \Auth::carrier()->getUser()->getAuthIdentifier();
 		}
-            }
         } catch (\Exception $e) {
             return null;
         }
