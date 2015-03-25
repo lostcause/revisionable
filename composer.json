@@ -11,8 +11,8 @@
         }
     ],
     "support": {
-        "issues": "https://github.com/VentureCraft/revisionable/issues",
-        "source": "https://github.com/VentureCraft/revisionable"
+        "issues": "https://github.com/lostcause/revisionable/issues",
+        "source": "https://github.com/lostcause/revisionable"
     },
     "require": {
         "php": ">=5.3.0",
