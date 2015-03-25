@@ -1,4 +1,7 @@
 <h1>This is only a fork of VentureCraft\revisonable</h1>
+<p>
+    I forked it because I added the 'postCreate' code from <a href="https://github.com/VentureCraft/revisionable/issues/120" target="_blank">https://github.com/VentureCraft/revisionable/issues/120</a>. I still need to integrate <a href="https://github.com/ollieread/multiauth" target="_blank">https://github.com/ollieread/multiauth</a>.
+</p>
 
 <img src="http://venturecraft.com.au/wp-content/uploads/2014/08/REVISIONABLE.png" style="width: 100%" alt="Revisionable" />
 
@@ -34,7 +37,7 @@ Revisionable is installable via [composer](http://getcomposer.org/doc/00-intro.m
 Add the following to the `require` section of your projects composer.json file:
 
 ```php
-"venturecraft/revisionable": "1.*",
+"lostcause/revisionable": "1.*",
 ```
 
 Run composer update to download the package
@@ -46,7 +49,7 @@ php composer.phar update
 Finally, you'll also need to run migration on the package
 
 ```
-php artisan migrate --package=venturecraft/revisionable
+php artisan migrate --package=lostcause/revisionable
 ```
 
 > If you're going to be migrating up and down completely a lot (using `migrate:refresh`), one thing you can do instead is to copy the migration file from the package to your `app/database` folder, and change the classname from `CreateRevisionsTable` to something like `CreateRevisionTable` (without the 's', otherwise you'll get an error saying there's a duplicate class)
