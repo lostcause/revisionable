@@ -196,10 +196,17 @@ class Revisionable extends Eloquent
     {
         try {
             if (class_exists($class = '\Cartalyst\Sentry\Facades\Laravel\Sentry')
-                    || class_exists($class = '\Cartalyst\Sentinel\Laravel\Facades\Sentinel')) {
+                    || class_exists($class = '\Cartalyst\Sentinel\Laravel\Facades\Sentinel')) 
+            {
                 return ($class::check()) ? $class::getUser()->id : null;
-            } elseif (\Auth::check()) {
-                return \Auth::user()->getAuthIdentifier();
+		elseif (\Auth::agent()->check())
+		{
+			return \Auth::agent()->getUser()->getAuthIdentifier();
+		}
+		elseif (\Auth::carrier()->check())
+		{
+			return \Auth::carrier()->getUser()->getAuthIdentifier();
+		}
             }
         } catch (\Exception $e) {
             return null;
